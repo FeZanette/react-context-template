@@ -1,9 +1,12 @@
 import Card from "../../components/Card/Card";
 import { Container } from "./HomePage.styled";
 import Header from "../../components/Header/Header";
+import { useContext } from "react";
+import { GlobalContext } from "../../contexts/GlobalContext";
 
-function HomePage(props) {
-  const { pokelist, addToPokedex, pokedex } = props;
+function HomePage() {
+  const context = useContext(GlobalContext);
+  const { pokelist, pokedex } = context;
 
   // não mostrar pokemons que estão na pokedex
   const filteredPokelist = () =>
@@ -19,11 +22,7 @@ function HomePage(props) {
       <Header />
       <section>
         {filteredPokelist().map((pokemon) => (
-          <Card
-            key={pokemon.url}
-            pokemonUrl={pokemon.url}
-            addToPokedex={addToPokedex}
-          />
+          <Card key={pokemon.url} pokemonUrl={pokemon.url} />
         ))}
       </section>
     </Container>
